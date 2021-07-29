@@ -40,30 +40,28 @@ namespace KryBest
         public override Job Tick()
         {
             if (!Input.GetKeyState(Settings.MathKey.Value)) return null;
-            MathWork();
+            //MathWork();
 
             return null;
         }
 
         public override void Render()
         {
-            /*  if (!IsRunConditionMet()) return;
-              IsRunning = true;*/
+             if (!IsRunConditionMet()) return;
+              IsRunning = true;
 
-            /*var coroutineWorker = new Coroutine(MathWork(), this, "KryBest.MathExpedition");
-            Core.ParallelRunner.Run(coroutineWorker);*/
+            var coroutineWorker = new Coroutine(MathWork(), this, "KryBest.MathExpedition");
+            Core.ParallelRunner.Run(coroutineWorker);
 
-            if (Settings.MathKey.PressedOnce())
-            {
-                MathWork();
-            }
+
         }
 
         private bool IsRunConditionMet()
         {
-            if (IsRunning) return false;
+            if (!Input.GetKeyState(Settings.MathKey.Value)) return false;
+            if (!GameController.Window.IsForeground()) return false;
 
-            return false;
+            return true;
         }
 
         private IEnumerator MathWork()
