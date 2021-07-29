@@ -10,7 +10,7 @@ namespace KryBest
         public ToggleNode Enable { get; set; } = new ToggleNode(true);
 
         [Menu("Math Best Choice Hotkey")]
-        public HotkeyNode MathKey { get; set; } = new HotkeyNode(Keys.F2);
+        public HotkeyNode MathKey { get; set; } = new HotkeyNode(Keys.F5);
 
         [Menu("Time between Clicks in Milliseconds")]
         public RangeNode<int> ExtraDelayInMs { get; set; } = new RangeNode<int>(40, 10, 100);
