@@ -32,17 +32,22 @@ namespace KryBest
 
         public override bool Initialise()
         {
-            Input.RegisterKey(Keys.LControlKey);
+            Input.RegisterKey(Settings.MathKey.Value);
             return true;
         }
 
         public override void Render()
         {
-          /*  if (!IsRunConditionMet()) return;
-            IsRunning = true;*/
+            /*  if (!IsRunConditionMet()) return;
+              IsRunning = true;*/
 
-            var coroutineWorker = new Coroutine(MathWork(), this, "KryBest.MathExpedition");
-            Core.ParallelRunner.Run(coroutineWorker);
+            /*var coroutineWorker = new Coroutine(MathWork(), this, "KryBest.MathExpedition");
+            Core.ParallelRunner.Run(coroutineWorker);*/
+
+            if (Settings.MathKey.PressedOnce())
+            {
+                MathWork();
+            }
         }
 
         private bool IsRunConditionMet()
@@ -63,12 +68,13 @@ namespace KryBest
 
             try
             {
+                DebugWindow.LogError("KryBest -> Entrou.");
                 var playerPos = GameController.Player.GetComponent<Positioned>().GridPos;
                 var ExpeditionStuff = GameController.EntityListWrapper.OnlyValidEntities
                     .SelectWhereF(x => x.GetHudComponent<BaseIcon>(), icon => icon != null).ToList();
 
-
-                  foreach (var stuff in ExpeditionStuff)
+                DebugWindow.LogError(string.Format("KryBest -> Count. {0}",ExpeditionStuff.Count));
+                foreach (var stuff in ExpeditionStuff)
                    {
                     /* Vector2 p1 = new Vector2(stuff.GridPosition().X, stuff.GridPosition().Y);
 
