@@ -34,8 +34,8 @@ namespace KryBest
 
         public override void Render()
         {
-            if (!IsRunConditionMet()) return;
-            IsRunning = true;
+          /*  if (!IsRunConditionMet()) return;
+            IsRunning = true;*/
 
             var coroutineWorker = new Coroutine(MathWork(), this, "KryBest.MathExpedition");
             Core.ParallelRunner.Run(coroutineWorker);
@@ -60,8 +60,10 @@ namespace KryBest
             try
             {
                 Vector3 pPos = GameController.Player.Pos;
-                var mPos = GetCursorPosition();
-                DrawLine(new Vector2(pPos.X, pPos.Y), new Vector2( mPos.X, mPos.Y));
+
+
+
+//                DrawLine(new Vector2(pPos.X, pPos.Y), new Vector2( mPos.X, mPos.Y));
             }
             finally
             {
@@ -82,13 +84,5 @@ namespace KryBest
         }
 
 
-        [DllImport("user32.dll")]
-        public static extern bool GetCursorPos(out Point lpPoint);
-
-        public static SharpDX.Point GetCursorPosition()
-        {
-            GetCursorPos(out Point lpPoint);
-            return lpPoint;
-        }
     }
 }
