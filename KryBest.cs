@@ -75,12 +75,13 @@ namespace KryBest
 
             try
             {
-                DebugWindow.LogError("KryBest -> Entrou.");
+                DebugWindow.LogError("Kry -> Entrou.");
                 var playerPos = GameController.Player.GetComponent<Positioned>().GridPos;
                 var ExpeditionStuff = GameController.EntityListWrapper.OnlyValidEntities
                     .SelectWhereF(x => x.GetHudComponent<BaseIcon>(), icon => icon != null).ToList();
 
-                DebugWindow.LogError(string.Format("KryBest -> Count. {0}",ExpeditionStuff.Count));
+                DebugWindow.LogError(string.Format("Kry -> Count. {0}",ExpeditionStuff.Count));
+                DebugWindow.LogError(string.Format("Kry --------------------------------------------"));
                 foreach (var stuff in ExpeditionStuff)
                    {
                     /* Vector2 p1 = new Vector2(stuff.GridPosition().X, stuff.GridPosition().Y);
@@ -90,7 +91,8 @@ namespace KryBest
 
                     if (stuff.Entity.Metadata.Contains("Expedition"))
                     {
-                        DebugWindow.LogError($"Ignored entities file does not exist. Path: {stuff.Entity.Metadata}");
+                        DebugWindow.LogError($"MetaData: {stuff.Entity.Metadata}  ---  {stuff.GridPosition} ---- {stuff.Entity.Rarity}");
+                       
                     }
                    }
                 
