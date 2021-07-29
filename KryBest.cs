@@ -68,8 +68,6 @@ namespace KryBest
                     .SelectWhereF(x => x.GetHudComponent<BaseIcon>(), icon => icon != null).ToList();
 
 
-                DebugWindow.LogError($"Ignored entities file does not exist. Path: {ExpeditionStuff.Count}");
-
                   foreach (var stuff in ExpeditionStuff)
                    {
                     /* Vector2 p1 = new Vector2(stuff.GridPosition().X, stuff.GridPosition().Y);
@@ -79,7 +77,7 @@ namespace KryBest
 
                     if (stuff.Entity.Metadata.Contains("Expedition"))
                     {
-                        DebugWindow.LogError($"Ignored entities file does not exist. Path: {ExpeditionStuff.Count}");
+                        DebugWindow.LogError($"Ignored entities file does not exist. Path: {stuff.Entity.Metadata}");
                     }
                    }
                 
