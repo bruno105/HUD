@@ -27,12 +27,15 @@ namespace KryBest
         private Random Random { get; } = new Random();
         private Vector2 ClickWindowOffset => GameController.Window.GetWindowRectangle().TopLeft;
 
+        private bool once = true;
+
         private static bool IsRunning { get; set; } = false;
 
 
         public override bool Initialise()
         {
             Input.RegisterKey(Settings.MathKey.Value);
+            Input.RegisterKey(Settings.ResetKey.Value);
             return true;
         }
 
@@ -40,6 +43,7 @@ namespace KryBest
         public override Job Tick()
         {
             if (!Input.GetKeyState(Settings.MathKey.Value)) return null;
+
             //MathWork();
 
             return null;
@@ -58,14 +62,21 @@ namespace KryBest
 
         private bool IsRunConditionMet()
         {
-            if (!Input.GetKeyState(Settings.MathKey.Value)) return false;
+            if (!Input.GetKeyState(Settings.MathKey.Value) && once == true) return false;
             if (!GameController.Window.IsForeground()) return false;
+            if (!Input.GetKeyState(Settings.ResetKey.Value) && once == false) {
+
+                once = true;
+                return true; 
+            
+            }
 
             return true;
         }
 
         private IEnumerator MathWork()
         {
+            once = false;
             var items = GameController.Game.IngameState.IngameUi.InventoryPanel[InventoryIndex.PlayerInventory]?.VisibleInventoryItems;
             if (items == null)
             {
@@ -78,22 +89,17 @@ namespace KryBest
                 DebugWindow.LogError("Kry -> Entrou.");
                 var playerPos = GameController.Player.GetComponent<Positioned>().GridPos;
                 var ExpeditionStuff = GameController.EntityListWrapper.OnlyValidEntities
-                    .SelectWhereF(x => x.GetHudComponent<BaseIcon>(), icon => icon != null).ToList();
+                    .SelectWhereF(x => x.GetHudComponent<BaseIcon>(), icon => icon.Entity.Metadata.Contains("Expedition")).ToList();
 
                 DebugWindow.LogError(string.Format("Kry -> Count. {0}",ExpeditionStuff.Count));
                 DebugWindow.LogError(string.Format("Kry --------------------------------------------"));
                 foreach (var stuff in ExpeditionStuff)
                    {
-                    /* Vector2 p1 = new Vector2(stuff.GridPosition().X, stuff.GridPosition().Y);
 
-                     RectangleF rec = new RectangleF(p1.X, p1.Y, 5, 5);
-                     Graphics.DrawBox(rec, Color.Blue);*/
 
-                    if (stuff.Entity.Metadata.Contains("Expedition"))
-                    {
                         DebugWindow.LogError($"MetaData: {stuff.Entity.Metadata}  ---  {stuff.GridPosition().X} , {stuff.GridPosition().Y} ---- {stuff.Entity.Rarity}");
                        
-                    }
+                    
                    }
                 
 
