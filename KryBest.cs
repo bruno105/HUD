@@ -65,19 +65,24 @@ namespace KryBest
             {
                 var playerPos = GameController.Player.GetComponent<Positioned>().GridPos;
                 var ExpeditionStuff = GameController.EntityListWrapper.OnlyValidEntities
-                    .SelectWhereF(x => x.GetHudComponent<BaseIcon>(), icon => icon != null && icon.Entity.Metadata.Contains("Expedition")).ToList();
+                    .SelectWhereF(x => x.GetHudComponent<BaseIcon>(), icon => icon != null).ToList();
 
 
                 DebugWindow.LogError($"Ignored entities file does not exist. Path: {ExpeditionStuff.Count}");
 
-                /*   foreach (var stuff in ExpeditionStuff)
+                  foreach (var stuff in ExpeditionStuff)
                    {
-                       Vector2 p1 = new Vector2(stuff.GridPosition().X, stuff.GridPosition().Y);
+                    /* Vector2 p1 = new Vector2(stuff.GridPosition().X, stuff.GridPosition().Y);
 
-                       RectangleF rec = new RectangleF(p1.X, p1.Y, 5, 5);
-                       Graphics.DrawBox(rec, Color.Blue);
+                     RectangleF rec = new RectangleF(p1.X, p1.Y, 5, 5);
+                     Graphics.DrawBox(rec, Color.Blue);*/
+
+                    if (stuff.Entity.Metadata.Contains("Expedition"))
+                    {
+                        DebugWindow.LogError($"Ignored entities file does not exist. Path: {ExpeditionStuff.Count}");
+                    }
                    }
-                */
+                
 
                 //   DebugWindow.LogError($"Ignored entities file does not exist. Path: {pPos}");
 
