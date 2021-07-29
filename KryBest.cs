@@ -5,7 +5,16 @@ using ImGuiNET;
 using SharpDX;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using ExileCore.PoEMemory;
+using ExileCore.PoEMemory.Components;
+using ExileCore.PoEMemory.MemoryObjects;
+using ExileCore.Shared.Cache;
+using System.Runtime.InteropServices;
 
 namespace KryBest
 {
@@ -35,13 +44,6 @@ namespace KryBest
         private bool IsRunConditionMet()
         {
             if (IsRunning) return false;
-            if (!Input.GetKeyState(Settings.MathKey.Value)) return false;
-            if (!GameController.Window.IsForeground()) return false;
-            if (!GameController.Game.IngameState.IngameUi.InventoryPanel.IsVisible) return false;
-
-            if (GameController.Game.IngameState.IngameUi.StashElement.IsVisibleLocal) return true;
-            if (GameController.Game.IngameState.IngameUi.SellWindow.IsVisibleLocal) return true;
-            if (GameController.Game.IngameState.IngameUi.TradeWindow.IsVisibleLocal) return true;
 
             return false;
         }
@@ -51,33 +53,19 @@ namespace KryBest
             var items = GameController.Game.IngameState.IngameUi.InventoryPanel[InventoryIndex.PlayerInventory]?.VisibleInventoryItems;
             if (items == null)
             {
-                DebugWindow.LogError("KryBest -> Items in inventory is null.");
+                DebugWindow.LogError("KryBest -> null.");
                 yield break;
             }
 
             try
             {
-                Input.KeyDown(Keys.LControlKey);
-                foreach (var item in items)
-                {   
-                    var centerOfItem = item.GetClientRect().Center
-                        + ClickWindowOffset
-                        + new Vector2(Random.Next(0, 5), Random.Next(0, 5));
-
-                    Input.SetCursorPos(centerOfItem);
-                    yield return new WaitTime(3);
-                    Input.Click(MouseButtons.Left);
-                    yield return new WaitTime(3);
-                    Input.Click(MouseButtons.Left);
-
-                    var waitTime = Math.Max(3, Settings.ExtraDelayInMs - 6 - 8 + Random.Next(0, 16));
-                    yield return new WaitTime(waitTime);
-                }
+                Vector3 pPos = GameController.Player.Pos;
+                var mPos = GetCursorPosition();
+                DrawLine(new Vector2(pPos.X, pPos.Y), new Vector2( mPos.X, mPos.Y));
             }
             finally
             {
-                Input.KeyUp(Keys.LControlKey);
-                IsRunning = false;
+
             }
         }
 
@@ -88,5 +76,19 @@ namespace KryBest
         }
 
 
+        private void DrawLine(Vector2 pos1 , Vector2 pos2)
+        {
+            Graphics.DrawLine(pos1, pos2, 2, Color.Red);
+        }
+
+
+        [DllImport("user32.dll")]
+        public static extern bool GetCursorPos(out Point lpPoint);
+
+        public static SharpDX.Point GetCursorPosition()
+        {
+            GetCursorPos(out Point lpPoint);
+            return lpPoint;
+        }
     }
 }
