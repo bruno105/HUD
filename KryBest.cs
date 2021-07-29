@@ -88,8 +88,8 @@ namespace KryBest
             {
                 DebugWindow.LogError("Kry -> Entrou.");
                 var playerPos = GameController.Player.GetComponent<Positioned>().GridPos;
-                var ExpeditionStuff = GameController.EntityListWrapper.OnlyValidEntities
-                    .SelectWhereF(x => x.GetHudComponent<BaseIcon>(), icon => icon != null).ToList();
+                var ExpeditionStuff = GameController.Game.IngameState.IngameUi.ItemsOnGroundLabels
+                    .Where(item => item != null && item.ItemOnGround.Metadata.Contains("ExpeditionRelic")).ToList();
 
                 DebugWindow.LogError(string.Format("Kry -> Count. {0}",ExpeditionStuff.Count));
                 DebugWindow.LogError(string.Format("Kry --------------------------------------------"));
@@ -97,7 +97,7 @@ namespace KryBest
                    {
 
 
-                        DebugWindow.LogError($"MetaData: {stuff.Entity.Metadata}  ---  {stuff.GridPosition().X} , {stuff.GridPosition().Y} ---- {stuff.Entity.Rarity}");
+                        DebugWindow.LogError($"MetaData: {stuff.ItemOnGround.Metadata}  ---  {stuff.ItemOnGround.GridPos.X} , {stuff.ItemOnGround.GridPos.Y} ---- {stuff.ItemOnGround.Rarity} ---- {stuff.ItemOnGround.GetComponent<ObjectMagicProperties>().Mods}");
                        
                     
                    }
