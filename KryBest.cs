@@ -60,7 +60,7 @@ namespace KryBest
             try
             {
                 Vector3 pPos = GameController.Player.Pos;
-                LogError($"Ignored entities file does not exist. Path: {pPos}");
+                DebugWindow($"Ignored entities file does not exist. Path: {pPos}");
 
 
                 //                DrawLine(new Vector2(pPos.X, pPos.Y), new Vector2( mPos.X, mPos.Y));
