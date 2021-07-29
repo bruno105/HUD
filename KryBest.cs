@@ -36,6 +36,15 @@ namespace KryBest
             return true;
         }
 
+
+        public override Job Tick()
+        {
+            if (!Input.GetKeyState(Settings.MathKey.Value)) return null;
+            MathWork();
+
+            return null;
+        }
+
         public override void Render()
         {
             /*  if (!IsRunConditionMet()) return;
