@@ -89,7 +89,7 @@ namespace KryBest
                 DebugWindow.LogError("Kry -> Entrou.");
                 var playerPos = GameController.Player.GetComponent<Positioned>().GridPos;
                 var ExpeditionStuff = GameController.EntityListWrapper.OnlyValidEntities
-                    .SelectWhereF(x => x.GetHudComponent<BaseIcon>(), icon => icon.Entity.Metadata.Contains("Expedition")).ToList();
+                    .SelectWhereF(x => x.GetHudComponent<BaseIcon>(), icon => icon != null).ToList();
 
                 DebugWindow.LogError(string.Format("Kry -> Count. {0}",ExpeditionStuff.Count));
                 DebugWindow.LogError(string.Format("Kry --------------------------------------------"));
