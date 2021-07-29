@@ -15,6 +15,10 @@ using ExileCore.PoEMemory.Components;
 using ExileCore.PoEMemory.MemoryObjects;
 using ExileCore.Shared.Cache;
 using System.Runtime.InteropServices;
+using ExileCore.Shared.Abstract;
+using ExileCore.Shared.Helpers;
+using JM.LinqFaster;
+
 
 namespace KryBest
 {
@@ -59,11 +63,26 @@ namespace KryBest
 
             try
             {
-                Vector3 pPos = GameController.Player.Pos;
-                DebugWindow($"Ignored entities file does not exist. Path: {pPos}");
+                var playerPos = GameController.Player.GetComponent<Positioned>().GridPos;
+                var ExpeditionStuff = GameController.EntityListWrapper.OnlyValidEntities
+                    .SelectWhereF(x => x.GetHudComponent<BaseIcon>(), icon => icon != null && icon.Entity.Metadata.Contains("Expedition")).ToList();
+
+            
 
 
-                //                DrawLine(new Vector2(pPos.X, pPos.Y), new Vector2( mPos.X, mPos.Y));
+                foreach (var stuff in ExpeditionStuff)
+                {
+                    Vector2 p1 = new Vector2(stuff.GridPosition().X, stuff.GridPosition().Y);
+                   
+                    RectangleF rec = new RectangleF(p1.X, p1.Y, 5, 5);
+                    Graphics.DrawBox(rec, Color.Blue);
+                }
+
+
+             //   DebugWindow.LogError($"Ignored entities file does not exist. Path: {pPos}");
+
+
+               //DrawLine(new Vector2(pPos.X, pPos.Y), new Vector2( mPos.X, mPos.Y));
             }
             finally
             {
