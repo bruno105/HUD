@@ -97,10 +97,17 @@ namespace KryBest
                    {
 
 
-                        DebugWindow.LogError($"MetaData: {stuff.ItemOnGround.Metadata}  ---  {stuff.ItemOnGround.GridPos.X} , {stuff.ItemOnGround.GridPos.Y} ---- {stuff.ItemOnGround.Rarity} ---- {stuff.ItemOnGround.GetComponent<ObjectMagicProperties>().Mods}");
-                       
-                    
-                   }
+                    DebugWindow.LogError($"MetaData: {stuff.ItemOnGround.Metadata}  ---  {stuff.ItemOnGround.GridPos.X} , {stuff.ItemOnGround.GridPos.Y} ---- {stuff.ItemOnGround.Rarity} ---- ");
+                    DebugWindow.LogError($"Mods on Relic:");
+                    foreach(var mod in stuff.ItemOnGround.GetComponent<ObjectMagicProperties>().Mods)
+                    {
+                        DebugWindow.LogError($"Mod: {mod}");
+
+                    }
+
+                    DebugWindow.LogError(string.Format("Kry --------------------------------------------"));
+
+                }
                 
 
                 //   DebugWindow.LogError($"Ignored entities file does not exist. Path: {pPos}");
