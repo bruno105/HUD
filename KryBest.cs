@@ -91,7 +91,7 @@ namespace KryBest
 
                     if (stuff.Entity.Metadata.Contains("Expedition"))
                     {
-                        DebugWindow.LogError($"MetaData: {stuff.Entity.Metadata}  ---  {stuff.GridPosition} ---- {stuff.Entity.Rarity}");
+                        DebugWindow.LogError($"MetaData: {stuff.Entity.Metadata}  ---  {stuff.GridPosition().X} , {stuff.GridPosition().Y} ---- {stuff.Entity.Rarity}");
                        
                     }
                    }
