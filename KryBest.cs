@@ -139,7 +139,8 @@ namespace KryBest
                         // var pickButtonRect =  new SharpDX.RectangleF(i.ItemOnGround.GridPos.X, i.ItemOnGround.GridPos.Y, 50, 50);
                         DebugWindow.LogError($"WorldToScreen: {worldtoscreen.X},{worldtoscreen.Y}");
 
-                        Graphics.DrawBox(worldtoscreen.TranslateToNum(-9, -9), worldtoscreen.TranslateToNum(18, 18), Color.BlueViolet);
+                        Graphics.DrawBox(worldtoscreen.TranslateToNum(0, 0), worldtoscreen.TranslateToNum(20, 20), Color.BlueViolet);
+                        Graphics.DrawLine(worldtoscreen.TranslateToNum(0,0), worldtoscreen.TranslateToNum(50, 0),1.0f,Color.Blue);
                     }
 
                 }
