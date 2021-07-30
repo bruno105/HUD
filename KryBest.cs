@@ -56,7 +56,74 @@ namespace KryBest
             /* var coroutineWorker = new Coroutine(MathWork(), this, "KryBest.MathExpedition");
              Core.ParallelRunner.Run(coroutineWorker);*/
 
-            MathWork();
+            // MathWork();
+
+            try
+            {
+
+                if (Calculed == false)
+                {
+                    entList.Clear();
+                    DebugWindow.LogError("Kry -> Entrou.");
+
+                    var playerPos = GameController.Player.GetComponent<Positioned>().GridPos;
+                    /* var ExpeditionStuff = GameController.Game.IngameState.IngameUi.ItemsOnGroundLabels
+                         .Where(item => item != null && item.ItemOnGround.Metadata.Contains("ExpeditionRelic")).ToList();*/
+                    var ExpeditionStuff = GameController.Entities.Where(item => item != null && item.Metadata.Contains("ExpeditionRelic")).ToList();
+
+                    DebugWindow.LogError(string.Format("Kry -> Count. {0}", ExpeditionStuff.Count));
+                    DebugWindow.LogError(string.Format("Kry --------------------------------------------"));
+                    foreach (var stuff in ExpeditionStuff)
+                    {
+                        entList.Add(stuff);
+
+                        DebugWindow.LogError($"MetaData: {stuff.Metadata}  ---  {stuff.GridPos.X} , {stuff.GridPos.Y} ---- {stuff.Rarity} ---- ");
+                        DebugWindow.LogError($"Mods on Relic:");
+                        foreach (var mod in stuff.GetComponent<ObjectMagicProperties>().Mods)
+                        {
+                            DebugWindow.LogError($"Mod: {mod}");
+
+                        }
+
+                        DebugWindow.LogError(string.Format("Kry --------------------------------------------"));
+
+                    }
+
+
+
+
+
+
+                    Calculed = true;
+
+                }
+
+
+
+                if (entList.Count > 0)
+                {
+                    var camera = GameController.IngameState.Camera;
+
+                    foreach (var i in entList)
+                    {
+                        var worldtoscreen = camera.WorldToScreen(i.Pos);
+                        // var pickButtonRect =  new SharpDX.RectangleF(i.ItemOnGround.GridPos.X, i.ItemOnGround.GridPos.Y, 50, 50);
+                        DebugWindow.LogError($"WorldToScreen: {worldtoscreen.X},{worldtoscreen.Y}");
+
+                        Graphics.DrawBox(worldtoscreen.TranslateToNum(0, 0), worldtoscreen.TranslateToNum(20, 20), Color.BlueViolet);
+                        Graphics.DrawLine(worldtoscreen.TranslateToNum(0, 0), worldtoscreen.TranslateToNum(50, 0), 1.0f, Color.Blue);
+                    }
+
+                }
+
+
+
+
+            }
+            finally
+            {
+
+            }
 
 
         }
