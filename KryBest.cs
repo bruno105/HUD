@@ -212,6 +212,7 @@ namespace KryBest
 
                         Graphics.DrawBox(worldtoscreen.TranslateToNum(0, 0), worldtoscreen.TranslateToNum(10, 20), Color.BlueViolet);
                         Graphics.DrawLine(worldtoscreen.TranslateToNum(-300,0), worldtoscreen.TranslateToNum(300, 0),1.0f,Color.Blue);
+                        // teste
                     }
 
                 }
