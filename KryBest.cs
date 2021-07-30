@@ -50,7 +50,7 @@ namespace KryBest
 
         public override void Render()
         {
-             if (!IsRunConditionMet()) return;
+          //   if (!IsRunConditionMet()) return;
 
 
             var coroutineWorker = new Coroutine(MathWork(), this, "KryBest.MathExpedition");
@@ -63,7 +63,7 @@ namespace KryBest
         {
             if (!Input.GetKeyState(Settings.MathKey.Value) && once == true) return false;
             if (!GameController.Window.IsForeground()) return false;
-            if (Input.GetKeyState(Settings.ResetKey.Value) && once == false) {
+            if (Input.GetKeyState(Settings.ResetKey.Value)) {
 
                 once = true;
                 Calculed = false;
