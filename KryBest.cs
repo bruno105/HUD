@@ -100,7 +100,7 @@ namespace KryBest
                     foreach (var i in entList)
                     {
                         var Start = camera.WorldToScreen(i.Pos);
-                        Vector3 aux = new Vector3(i.Pos.X + 50,i.Pos.Y,i.Pos.Z);
+                        Vector3 aux = new Vector3(i.Pos.X,i.Pos.Y,i.Pos.Z);
                         var End =   camera.WorldToScreen(i.Pos);
                         // var pickButtonRect =  new SharpDX.RectangleF(i.ItemOnGround.GridPos.X, i.ItemOnGround.GridPos.Y, 50, 50);
                         DebugWindow.LogError($"Pos: {Start},{End}  --- ");
