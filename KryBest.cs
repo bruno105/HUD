@@ -206,10 +206,10 @@ namespace KryBest
                     foreach (var i in entList)
                     {
                         var worldtoscreen = camera.WorldToScreen(i.Pos);
-                        // var pickButtonRect =  new SharpDX.RectangleF(i.ItemOnGround.GridPos.X, i.ItemOnGround.GridPos.Y, 50, 50);
-                        DebugWindow.LogError($"WorldToScreen: {worldtoscreen.X},{worldtoscreen.Y}");
 
-                        Graphics.DrawBox(worldtoscreen.TranslateToNum(0, 0), worldtoscreen.TranslateToNum(20, 20), Color.BlueViolet);
+                        DebugWindow.LogError($"WorldToScreen1: {worldtoscreen.X},{worldtoscreen.Y}");
+
+                        Graphics.DrawBox(worldtoscreen.TranslateToNum(0, 0), worldtoscreen.TranslateToNum(10, 20), Color.BlueViolet);
                         Graphics.DrawLine(worldtoscreen.TranslateToNum(-300,0), worldtoscreen.TranslateToNum(300, 0),1.0f,Color.Blue);
                     }
 
