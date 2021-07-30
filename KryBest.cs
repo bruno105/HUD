@@ -63,7 +63,7 @@ namespace KryBest
         {
             if (!Input.GetKeyState(Settings.MathKey.Value) && once == true) return false;
             if (!GameController.Window.IsForeground()) return false;
-            if (!Input.GetKeyState(Settings.ResetKey.Value) && once == false) {
+            if (Input.GetKeyState(Settings.ResetKey.Value) && once == false) {
 
                 once = true;
                 Calculed = false;
