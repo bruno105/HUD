@@ -122,7 +122,7 @@ namespace KryBest
 
                         foreach(var i in entList)
                         {
-                            var pickButtonRect =  new SharpDX.RectangleF(i.ItemOnGround.GridPos.X, i.ItemOnGround.GridPos.X+ 10, 50, 50);
+                            var pickButtonRect =  new SharpDX.RectangleF(i.ItemOnGround.GridPos.X, i.ItemOnGround.GridPos.Y, 50, 50);
                             Graphics.DrawBox(pickButtonRect, Color.BlueViolet);
                         }
 
