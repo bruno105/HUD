@@ -39,14 +39,7 @@ namespace KryBest
         }
 
 
-        public override Job Tick()
-        {
-            if (!Input.GetKeyState(Settings.MathKey.Value)) return null;
 
-            //MathWork();
-
-            return null;
-        }
 
         public override void Render()
         {
@@ -57,7 +50,7 @@ namespace KryBest
              Core.ParallelRunner.Run(coroutineWorker);*/
 
             // MathWork();
-
+            IsRunConditionMet();
             try
             {
 
