@@ -100,13 +100,17 @@ namespace KryBest
                     foreach (var i in entList)
                     {
                         var Start = camera.WorldToScreen(i.Pos);
-                        Vector3 aux = new Vector3(i.Pos.X+10,i.Pos.Y,i.Pos.Z);
+                        Vector3 aux = new Vector3(i.Pos.X,i.Pos.Y,i.Pos.Z);
                         var End =   camera.WorldToScreen(i.Pos);
+
+                        var Start2 = new System.Numerics.Vector2(Start.X, Start.Y);
+                        var End2 = new System.Numerics.Vector2(End.X+50, End.Y);
                         // var pickButtonRect =  new SharpDX.RectangleF(i.ItemOnGround.GridPos.X, i.ItemOnGround.GridPos.Y, 50, 50);
                         DebugWindow.LogError($"Pos: {Start},{End}  --- ");
 
                         Graphics.DrawBox(Start.TranslateToNum(0, 0), End.TranslateToNum(20, 20), Color.BlueViolet);
-                        Graphics.DrawLine(Start.TranslateToNum(0, 0), End.TranslateToNum(100, 50), 2.0f, Color.Blue);
+                        Graphics.DrawLine(Start.TranslateToNum(0, 0), End.TranslateToNum(20, 20),2.0f, Color.Red);
+                        Graphics.DrawLine(Start2, End2, 2.0f, Color.Blue);
                     }
 
                 }
