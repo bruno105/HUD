@@ -85,7 +85,7 @@ namespace KryBest
 
                         }
 
-                        DebugWindow.LogError(string.Format("Kry --------------------------------------------"));
+                        DebugWindow.LogError(string.Format("Kry -----------------------{0}---------------------", entList.Count));
 
                     }
 
