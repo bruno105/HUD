@@ -74,7 +74,7 @@ namespace KryBest
             return true;
         }
 
-        private readonly List<LabelOnGround> entList = new List<LabelOnGround>();
+        private readonly List<Entity> entList = new List<Entity>();
         private IEnumerator MathWork()
         {
             once = false;
@@ -94,8 +94,9 @@ namespace KryBest
                     DebugWindow.LogError("Kry -> Entrou.");
 
                     var playerPos = GameController.Player.GetComponent<Positioned>().GridPos;
-                    var ExpeditionStuff = GameController.Game.IngameState.IngameUi.ItemsOnGroundLabels
-                        .Where(item => item != null && item.ItemOnGround.Metadata.Contains("ExpeditionRelic")).ToList();
+                    /* var ExpeditionStuff = GameController.Game.IngameState.IngameUi.ItemsOnGroundLabels
+                         .Where(item => item != null && item.ItemOnGround.Metadata.Contains("ExpeditionRelic")).ToList();*/
+                    var ExpeditionStuff = GameController.Entities.Where(item => item != null && item.Metadata.Contains("ExpeditionRelic")).ToList();
 
                     DebugWindow.LogError(string.Format("Kry -> Count. {0}", ExpeditionStuff.Count));
                     DebugWindow.LogError(string.Format("Kry --------------------------------------------"));
@@ -103,9 +104,9 @@ namespace KryBest
                     {
                         entList.Add(stuff);
 
-                        DebugWindow.LogError($"MetaData: {stuff.ItemOnGround.Metadata}  ---  {stuff.ItemOnGround.GridPos.X} , {stuff.ItemOnGround.GridPos.Y} ---- {stuff.ItemOnGround.Rarity} ---- ");
+                        DebugWindow.LogError($"MetaData: {stuff.Metadata}  ---  {stuff.GridPos.X} , {stuff.GridPos.Y} ---- {stuff.Rarity} ---- ");
                         DebugWindow.LogError($"Mods on Relic:");
-                        foreach (var mod in stuff.ItemOnGround.GetComponent<ObjectMagicProperties>().Mods)
+                        foreach (var mod in stuff.GetComponent<ObjectMagicProperties>().Mods)
                         {
                             DebugWindow.LogError($"Mod: {mod}");
 
@@ -123,8 +124,9 @@ namespace KryBest
 
                         foreach (var i in entList)
                         {
-                            var worldtoscreen = camera.WorldToScreen(i.ItemOnGround.Pos);
+                            var worldtoscreen = camera.WorldToScreen(i.Pos);
                             // var pickButtonRect =  new SharpDX.RectangleF(i.ItemOnGround.GridPos.X, i.ItemOnGround.GridPos.Y, 50, 50);
+                            DebugWindow.LogError($"WorldToScreen: {worldtoscreen.X},{worldtoscreen.Y}");
 
                             Graphics.DrawBox(worldtoscreen.TranslateToNum(-9, -9), worldtoscreen.TranslateToNum(18, 18), Color.BlueViolet);
                         }
