@@ -126,7 +126,7 @@ namespace KryBest
                             var worldtoscreen = camera.WorldToScreen(i.ItemOnGround.Pos);
                             // var pickButtonRect =  new SharpDX.RectangleF(i.ItemOnGround.GridPos.X, i.ItemOnGround.GridPos.Y, 50, 50);
 
-                            Graphics.DrawText($"teste", worldtoscreen);
+                            Graphics.DrawBox(worldtoscreen.TranslateToNum(-9, -9), worldtoscreen.TranslateToNum(18, 18), Color.BlueViolet);
                         }
 
                     }
