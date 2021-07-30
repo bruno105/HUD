@@ -18,7 +18,7 @@ using System.Runtime.InteropServices;
 using ExileCore.Shared.Abstract;
 using ExileCore.Shared.Helpers;
 using JM.LinqFaster;
-
+using ExileCore.PoEMemory.Elements;
 
 namespace KryBest
 {
@@ -74,6 +74,7 @@ namespace KryBest
             return true;
         }
 
+        private readonly List<LabelOnGround> entList = new List<LabelOnGround>();
         private IEnumerator MathWork()
         {
             once = false;
@@ -89,6 +90,7 @@ namespace KryBest
 
                 if (Calculed == false)
                 {
+                    entList.Clear();
                     DebugWindow.LogError("Kry -> Entrou.");
 
                     var playerPos = GameController.Player.GetComponent<Positioned>().GridPos;
@@ -99,7 +101,7 @@ namespace KryBest
                     DebugWindow.LogError(string.Format("Kry --------------------------------------------"));
                     foreach (var stuff in ExpeditionStuff)
                     {
-
+                        entList.Add(stuff);
 
                         DebugWindow.LogError($"MetaData: {stuff.ItemOnGround.Metadata}  ---  {stuff.ItemOnGround.GridPos.X} , {stuff.ItemOnGround.GridPos.Y} ---- {stuff.ItemOnGround.Rarity} ---- ");
                         DebugWindow.LogError($"Mods on Relic:");
@@ -114,9 +116,24 @@ namespace KryBest
                     }
 
 
+
+                    if(entList.Count > 0)
+                    {
+
+                        foreach(var i in entList)
+                        {
+                            var pickButtonRect =  new SharpDX.RectangleF(i.ItemOnGround.GridPos.X, i.ItemOnGround.GridPos.X+ 10, 50, 50);
+                            Graphics.DrawImage("pick.png", pickButtonRect);
+                        }
+
+                    }
+
+
                     Calculed = true;
 
                 }
+
+                
 
 
             }
@@ -136,8 +153,11 @@ namespace KryBest
         private void DrawLine(Vector2 pos1 , Vector2 pos2)
         {
             Graphics.DrawLine(pos1, pos2, 2, Color.Red);
+            
         }
 
+
+       
 
     }
 }
