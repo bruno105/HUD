@@ -105,8 +105,8 @@ namespace KryBest
                         // var pickButtonRect =  new SharpDX.RectangleF(i.ItemOnGround.GridPos.X, i.ItemOnGround.GridPos.Y, 50, 50);
                         DebugWindow.LogError($"Pos: {Start},{End}  --- ");
 
-                        Graphics.DrawBox(Start.TranslateToNum(0, 0), End.TranslateToNum(0, 0), Color.BlueViolet);
-                        Graphics.DrawLine(Start.TranslateToNum(0, 0), End.TranslateToNum(0, 0), 1.0f, Color.Blue);
+                        Graphics.DrawBox(Start.TranslateToNum(0, 0), End.TranslateToNum(20, 20), Color.BlueViolet);
+                        Graphics.DrawLine(Start.TranslateToNum(0, 0), End.TranslateToNum(10, 0), 1.0f, Color.Blue);
                     }
 
                 }
