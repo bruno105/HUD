@@ -27,9 +27,8 @@ namespace KryBest
         private Random Random { get; } = new Random();
         private Vector2 ClickWindowOffset => GameController.Window.GetWindowRectangle().TopLeft;
 
-        private bool once = true;
-
-        private static bool IsRunning { get; set; } = false;
+        private static bool once { get; set; } = true;
+        private static bool Calculed { get; set; } = false;
 
 
         public override bool Initialise()
@@ -52,7 +51,7 @@ namespace KryBest
         public override void Render()
         {
              if (!IsRunConditionMet()) return;
-              IsRunning = true;
+
 
             var coroutineWorker = new Coroutine(MathWork(), this, "KryBest.MathExpedition");
             Core.ParallelRunner.Run(coroutineWorker);
@@ -67,6 +66,7 @@ namespace KryBest
             if (!Input.GetKeyState(Settings.ResetKey.Value) && once == false) {
 
                 once = true;
+                Calculed = false;
                 return true; 
             
             }
@@ -86,34 +86,39 @@ namespace KryBest
 
             try
             {
-                DebugWindow.LogError("Kry -> Entrou.");
-                var playerPos = GameController.Player.GetComponent<Positioned>().GridPos;
-                var ExpeditionStuff = GameController.Game.IngameState.IngameUi.ItemsOnGroundLabels
-                    .Where(item => item != null && item.ItemOnGround.Metadata.Contains("ExpeditionRelic")).ToList();
 
-                DebugWindow.LogError(string.Format("Kry -> Count. {0}",ExpeditionStuff.Count));
-                DebugWindow.LogError(string.Format("Kry --------------------------------------------"));
-                foreach (var stuff in ExpeditionStuff)
-                   {
+                if (Calculed == false)
+                {
+                    DebugWindow.LogError("Kry -> Entrou.");
 
+                    var playerPos = GameController.Player.GetComponent<Positioned>().GridPos;
+                    var ExpeditionStuff = GameController.Game.IngameState.IngameUi.ItemsOnGroundLabels
+                        .Where(item => item != null && item.ItemOnGround.Metadata.Contains("ExpeditionRelic")).ToList();
 
-                    DebugWindow.LogError($"MetaData: {stuff.ItemOnGround.Metadata}  ---  {stuff.ItemOnGround.GridPos.X} , {stuff.ItemOnGround.GridPos.Y} ---- {stuff.ItemOnGround.Rarity} ---- ");
-                    DebugWindow.LogError($"Mods on Relic:");
-                    foreach(var mod in stuff.ItemOnGround.GetComponent<ObjectMagicProperties>().Mods)
+                    DebugWindow.LogError(string.Format("Kry -> Count. {0}", ExpeditionStuff.Count));
+                    DebugWindow.LogError(string.Format("Kry --------------------------------------------"));
+                    foreach (var stuff in ExpeditionStuff)
                     {
-                        DebugWindow.LogError($"Mod: {mod}");
+
+
+                        DebugWindow.LogError($"MetaData: {stuff.ItemOnGround.Metadata}  ---  {stuff.ItemOnGround.GridPos.X} , {stuff.ItemOnGround.GridPos.Y} ---- {stuff.ItemOnGround.Rarity} ---- ");
+                        DebugWindow.LogError($"Mods on Relic:");
+                        foreach (var mod in stuff.ItemOnGround.GetComponent<ObjectMagicProperties>().Mods)
+                        {
+                            DebugWindow.LogError($"Mod: {mod}");
+
+                        }
+
+                        DebugWindow.LogError(string.Format("Kry --------------------------------------------"));
 
                     }
 
-                    DebugWindow.LogError(string.Format("Kry --------------------------------------------"));
+
+                    Calculed = true;
 
                 }
-                
-
-                //   DebugWindow.LogError($"Ignored entities file does not exist. Path: {pPos}");
 
 
-                //DrawLine(new Vector2(pPos.X, pPos.Y), new Vector2( mPos.X, mPos.Y));
             }
             finally
             {
