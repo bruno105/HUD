@@ -50,11 +50,13 @@ namespace KryBest
 
         public override void Render()
         {
-          //   if (!IsRunConditionMet()) return;
+            //   if (!IsRunConditionMet()) return;
 
 
-            var coroutineWorker = new Coroutine(MathWork(), this, "KryBest.MathExpedition");
-            Core.ParallelRunner.Run(coroutineWorker);
+            /* var coroutineWorker = new Coroutine(MathWork(), this, "KryBest.MathExpedition");
+             Core.ParallelRunner.Run(coroutineWorker);*/
+
+            MathWork();
 
 
         }
