@@ -118,27 +118,31 @@ namespace KryBest
 
 
 
-                    if(entList.Count > 0)
-                    {
-                        var camera = GameController.IngameState.Camera;
 
-                        foreach (var i in entList)
-                        {
-                            var worldtoscreen = camera.WorldToScreen(i.Pos);
-                            // var pickButtonRect =  new SharpDX.RectangleF(i.ItemOnGround.GridPos.X, i.ItemOnGround.GridPos.Y, 50, 50);
-                            DebugWindow.LogError($"WorldToScreen: {worldtoscreen.X},{worldtoscreen.Y}");
-
-                            Graphics.DrawBox(worldtoscreen.TranslateToNum(-9, -9), worldtoscreen.TranslateToNum(18, 18), Color.BlueViolet);
-                        }
-
-                    }
 
 
                     Calculed = true;
 
                 }
 
-                
+
+
+                if (entList.Count > 0)
+                {
+                    var camera = GameController.IngameState.Camera;
+
+                    foreach (var i in entList)
+                    {
+                        var worldtoscreen = camera.WorldToScreen(i.Pos);
+                        // var pickButtonRect =  new SharpDX.RectangleF(i.ItemOnGround.GridPos.X, i.ItemOnGround.GridPos.Y, 50, 50);
+                        DebugWindow.LogError($"WorldToScreen: {worldtoscreen.X},{worldtoscreen.Y}");
+
+                        Graphics.DrawBox(worldtoscreen.TranslateToNum(-9, -9), worldtoscreen.TranslateToNum(18, 18), Color.BlueViolet);
+                    }
+
+                }
+
+
 
 
             }
