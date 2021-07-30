@@ -119,11 +119,14 @@ namespace KryBest
 
                     if(entList.Count > 0)
                     {
+                        var camera = GameController.IngameState.Camera;
 
-                        foreach(var i in entList)
+                        foreach (var i in entList)
                         {
-                            var pickButtonRect =  new SharpDX.RectangleF(i.ItemOnGround.GridPos.X, i.ItemOnGround.GridPos.Y, 50, 50);
-                            Graphics.DrawBox(pickButtonRect, Color.BlueViolet);
+                            var worldtoscreen = camera.WorldToScreen(i.ItemOnGround.Pos);
+                            // var pickButtonRect =  new SharpDX.RectangleF(i.ItemOnGround.GridPos.X, i.ItemOnGround.GridPos.Y, 50, 50);
+
+                            Graphics.DrawText($"teste", worldtoscreen);
                         }
 
                     }
