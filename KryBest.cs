@@ -115,6 +115,10 @@ namespace KryBest
                     }
 
                 }
+                else
+                {
+                    Calculed = false;
+                }
 
 
 
