@@ -103,8 +103,8 @@ namespace KryBest
                         Vector3 aux = new Vector3(i.Pos.X+50,i.Pos.Y,i.Pos.Z);
                         var End =   camera.WorldToScreen(i.Pos);
 
-                        var Start2 = new System.Numerics.Vector2(Start.X, Start.Y);
-                        var End2 = new System.Numerics.Vector2(End.X+50, End.Y);
+                        var Start2 = new System.Numerics.Vector2(i.GridPos.X, i.GridPos.Y);
+                        var End2 = new System.Numerics.Vector2(i.GridPos.X+50, i.GridPos.Y);
                         // var pickButtonRect =  new SharpDX.RectangleF(i.ItemOnGround.GridPos.X, i.ItemOnGround.GridPos.Y, 50, 50);
                         DebugWindow.LogError($"Pos: {Start},{End}  --- ");
 
